@@ -1,0 +1,26 @@
+###############################################################################
+#
+# IAR Assembler V3.10.1.201 for STM8                      19/Feb/2020  09:21:37
+# Copyright 2010-2017 IAR Systems AB.
+#
+#    Source file  =  atomport-asm-iar.s
+#    Command line =  
+#        atomport-asm-iar.s -M<> -ld build-iar\list --diag_suppress Pa050
+#        --code_model small --data_model medium -I ../../kernel -o
+#        build-iar/atomport-asm-iar.o
+#    List file    =  build-iar\list.lst
+#    Object file  =  build-iar/atomport-asm-iar.o
+#
+###############################################################################
+
+##############################################################################
+# Module ATOMPORTASM                                                         #
+##############################################################################
+
+ 
+ 88 bytes in section .near_func.text  , module ATOMPORTASM
+ 
+ 88 bytes of CODE memory  in module ATOMPORTASM
+
+Errors: none
+Warnings: none
