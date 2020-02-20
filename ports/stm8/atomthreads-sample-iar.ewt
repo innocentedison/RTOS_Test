@@ -2154,10 +2154,16 @@
             <name>$PROJ_DIR$\atomport.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\device\led.c</name>
+            <name>$PROJ_DIR$\led.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\device\led.h</name>
+            <name>$PROJ_DIR$\led.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\sc8815.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\sc8815.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\stm8s_conf.h</name>
@@ -2194,6 +2200,12 @@
         </file>
         <file>
             <name>$PROJ_DIR$\stm8s-periphs\stm8s_gpio.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\stm8s-periphs\stm8s_i2c.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\stm8s-periphs\stm8s_i2c.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\stm8s-periphs\stm8s_itc.c</name>

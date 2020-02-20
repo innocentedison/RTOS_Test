@@ -8,14 +8,20 @@
   ***************************************************************************/
 
 
-#ifndef _LED_H
-#define _LED_H
+#ifndef _SC8815_H
+#define _SC8815_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "atom.h"
 
 /* Exported variables ------------------------------------------------------- */
+
+
+#define I2C_SPEED              400000
+#define I2C_SLAVE_ADDRESS7     0x74
 /* Exported types ------------------------------------------------------------*/
+
+
 
 /** @addtogroup GPIO_Exported_Types
   * @{
@@ -27,12 +33,16 @@
 /** @addtogroup GPIO_Exported_Functions
   * @{
   */
-
-int led_init(void);
+void Delayms(unsigned int ms);
+void IIC_Deinit(void);
+void IIC_Init(void);
+void IIC_Write(unsigned char subaddr , unsigned char Byte_addr , unsigned char *buffer , unsigned short num);
+void IIC_Read(unsigned char subaddr , unsigned char Byte_addr , unsigned char *buffer , unsigned short num);
+void I2C_AT24C02_Test(void);
 /**
   * @}
   */
 
-#endif /* _LED_H */
+#endif /* _SC8815_H */
 
 /******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/

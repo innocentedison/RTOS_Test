@@ -12,8 +12,7 @@
 #define _LED_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm8s.h"
-#include "stm8s_gpio.h"
+#include "atom.h"
 
 /* Exported variables ------------------------------------------------------- */
 /* Exported types ------------------------------------------------------------*/
@@ -29,8 +28,7 @@
   * @{
   */
 
-void Led_DeInit(void);
-void Led_Init(void);
+int led_init(void);
 /**
   * @}
   */

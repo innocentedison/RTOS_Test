@@ -39,6 +39,8 @@
 #include "stm8s.h"
 #include "led.h"
 
+#include "sc8815.h"
+
 
 /* Constants */
 
@@ -191,7 +193,9 @@ static void main_thread_func (uint32_t param)
 {
     uint32_t test_status;
     int sleep_ticks;
-
+    u8 CNT;
+    unsigned char I2c_Buf[2];
+    
     /* Compiler warnings */
     param = param;
 
@@ -246,7 +250,11 @@ static void main_thread_func (uint32_t param)
     /* Flash LED once per second if passed, very quickly if failed */
     sleep_ticks = (test_status == 0) ? SYSTEM_TICKS_PER_SEC : (SYSTEM_TICKS_PER_SEC/8);
 
-    UART2_DeInit();
+    IIC_Init();
+    I2C_AT24C02_Test();
+    
+    
+ //   UART2_DeInit();
     
      /*  Initialise LEDs  */
     if (led_init() != 0)
@@ -268,7 +276,7 @@ static void main_thread_func (uint32_t param)
         GPIO_WriteReverse(GPIOE, GPIO_PIN_0);
         GPIO_WriteReverse(GPIOD, GPIO_PIN_0);
         GPIO_WriteReverse(GPIOD, GPIO_PIN_2);
-        
+      
 
         /* Sleep then toggle LED again */
         atomTimerDelay (sleep_ticks);

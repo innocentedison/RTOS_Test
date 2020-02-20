@@ -124,6 +124,24 @@
 /** @addtogroup MAP_FILE_Exported_Types_and_Constants
   * @{
   */
+/**
+ * IO definitions
+ *
+ * define access restrictions to peripheral registers
+ */
+#define     __I     volatile const   /*!< defines 'read only' permissions     */
+#define     __O     volatile         /*!< defines 'write only' permissions    */
+#define     __IO    volatile         /*!< defines 'read / write' permissions  */
+
+
+
+/*!< STM8 Standard Peripheral Library old types (maintained for legacy purpose) */
+
+
+/**
+  * @}
+  */
+
 
 /******************************************************************************/
 /*                          IP registers structures                           */

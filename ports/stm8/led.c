@@ -18,6 +18,11 @@
 **/
 
 /* Includes ------------------------------------------------------------------*/
+
+#include <stdio.h>
+#include "stm8s_gpio.h"
+#include "atom.h"
+#include "atommutex.h"
 #include "led.h"
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,18 +39,10 @@
   * @{
   */
 
-/**
-  * @brief Deinitializes the led GPIOs registers to their default reset
-  * values.
-  * @param[in] None
-  * @retval None
-  */
-void Led_DeInit(void)
-{
-    GPIO_DeInit(GPIOA);
-    GPIO_DeInit(GPIOD);  
-    GPIO_DeInit(GPIOE);  
-}
+/*
+ * Semaphore for single-threaded access to led device
+ */
+static ATOM_MUTEX led_mutex;
 
 /**
   * @brief initializes the led GPIOs registers to preset
@@ -53,27 +50,29 @@ void Led_DeInit(void)
   * @param[in] None
   * @retval None
   */
-void Led_Init(void)
+int led_init(void)
 {
-     /* Configure GPIO for Charger work mode indication(D6/PE0/standard,D7/PD0/fast,D8/PD2/maintaining) */
-    GPIO_DeInit(GPIOA);
-    GPIO_DeInit(GPIOD);  
-    GPIO_DeInit(GPIOE);
-    GPIO_Init(GPIOE, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOD, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOD, GPIO_PIN_2, GPIO_MODE_OUT_PP_LOW_FAST);
-    
-    /* Configure GPIO for Charging status indication(D1/PA2,D2/PD7,D3/PD5,D4/PA6,D5/PA4,D6/PE0) */
-    GPIO_Init(GPIOA, GPIO_PIN_2, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOD, GPIO_PIN_7, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOD, GPIO_PIN_5, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOA, GPIO_PIN_6, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOA, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOE, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
+   int status;
+  
+  /**
+   * Set up Led GPIOs for indicate status and indicators.
+   */
+  Led_GPIOs_Init();
 
-    /* Configure GPIO for Charging channel indication 3 color LED(Orange/PD4,Green/PD3) */
-    GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
-    GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
+
+  /* Create a mutex for single-threaded putchar() access */
+  if (atomMutexCreate (&led_mutex) != ATOM_OK)
+  {
+    status = -1;
+  }
+  else
+  {
+    status = 0;
+  }
+
+  /* Finished */
+  return (status);
+
 }
 
 /**
