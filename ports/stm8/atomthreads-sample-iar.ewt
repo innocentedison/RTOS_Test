@@ -2154,6 +2154,12 @@
             <name>$PROJ_DIR$\atomport.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\device\led.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\device\led.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\stm8s_conf.h</name>
         </file>
         <file>

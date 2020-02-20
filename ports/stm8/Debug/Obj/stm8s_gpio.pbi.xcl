@@ -1,4 +1,4 @@
-"E:\电源\BCM_Version_N1_20200218\RTOS_Test\atomthreads-master\ports\stm8\stm8s-periphs\stm8s_gpio.c"
+"E:\RTOS_Test\atomthreads-master\ports\stm8\stm8s-periphs\stm8s_gpio.c"
 -std=c99
 -ferror-limit=0
 -I

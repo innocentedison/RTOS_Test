@@ -1,22 +1,26 @@
-"E:\电源\BCM_Version_N1_20200218\RTOS_Test\atomthreads-master\ports\stm8\atomport.c"
+"E:\RTOS_Test\atomthreads-master\ports\stm8\atomport.c"
 -std=c99
 -ferror-limit=0
 -I
-../../kernel
+E:\RTOS_Test\atomthreads-master\ports\stm8\..\..\kernel
 -I
-../../tests
+E:\RTOS_Test\atomthreads-master\ports\stm8\stm8s-periphs
 -I
-./stm8s-periphs
+E:\RTOS_Test\atomthreads-master\ports\stm8\..\..\tests
+-I
+E:\RTOS_Test\atomthreads-master\ports\stm8
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc\c
 -I
-../../kernel
+E:\RTOS_Test\atomthreads-master\kernel
 -I
-../../tests
+E:\RTOS_Test\atomthreads-master\ports\stm8\stm8s-periphs
 -I
-C:\Windows\system32\stm8s-periphs
+E:\RTOS_Test\atomthreads-master\tests
+-I
+E:\RTOS_Test\atomthreads-master\ports\stm8
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

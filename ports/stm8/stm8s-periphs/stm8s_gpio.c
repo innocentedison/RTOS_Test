@@ -119,17 +119,152 @@ void GPIO_Init(GPIO_TypeDef* GPIOx,
 
 
 /**
-  * @brief Writes reverse level to the specified GPIO pins.
-  * @param[in] GPIOx : Select the GPIO peripheral number (x = A to I).
-  * @param[in] PortPins : Specifies the pins to be reversed to the port output.
-  * data register.
+  * @brief  Writes data to the specified GPIO data port.
+  * @note   The port must be configured in output mode.
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  GPIO_PortVal : Specifies the value to be written to the port output
+  *         data register.
   * @retval None
-  * @par Required preconditions:
-  * The port must be configured in output mode.
+  */
+void GPIO_Write(GPIO_TypeDef* GPIOx, u8 PortVal)
+{
+  GPIOx->ODR = PortVal;
+}
+
+/**
+  * @brief  Writes high level to the specified GPIO pins.
+  * @note   The port must be configured in output mode.  
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  PortPins : Specifies the pins to be turned high to the port output.
+  *         data register.
+  * @retval None
+  */
+void GPIO_WriteHigh(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef PortPins)
+{
+  GPIOx->ODR |= (u8)PortPins;
+}
+
+/**
+  * @brief  Writes low level to the specified GPIO pins.
+  * @note   The port must be configured in output mode.  
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  PortPins : Specifies the pins to be turned low to the port output.
+  *         data register.
+  * @retval None
+  */
+void GPIO_WriteLow(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef PortPins)
+{
+  GPIOx->ODR &= (u8)(~PortPins);
+}
+
+/**
+  * @brief  Writes reverse level to the specified GPIO pins.
+  * @note   The port must be configured in output mode.
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  PortPins : Specifies the pins to be reversed to the port output.
+  *         data register.
+  * @retval None
   */
 void GPIO_WriteReverse(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef PortPins)
 {
-    GPIOx->ODR ^= (u8)PortPins;
+  GPIOx->ODR ^= (u8)PortPins;
+}
+
+/**
+  * @brief  Reads the specified GPIO output data port.
+  * @note   The port must be configured in input mode.  
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @retval GPIO output data port value.
+  */
+u8 GPIO_ReadOutputData(GPIO_TypeDef* GPIOx)
+{
+  return ((u8)GPIOx->ODR);
+}
+
+/**
+  * @brief  Reads the specified GPIO input data port.
+  * @note   The port must be configured in input mode.   
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @retval GPIO input data port value.
+  */
+u8 GPIO_ReadInputData(GPIO_TypeDef* GPIOx)
+{
+  return ((u8)GPIOx->IDR);
+}
+
+/**
+  * @brief  Reads the specified GPIO input data pin.
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  GPIO_Pin : Specifies the pin number.
+  * @retval BitStatus : GPIO input pin status.
+  */
+BitStatus GPIO_ReadInputPin(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin)
+{
+  return ((BitStatus)(GPIOx->IDR & (u8)GPIO_Pin));
+}
+
+/**
+  * @brief  Configures the external pull-up on GPIOx pins.
+  * @param  GPIOx : Select the GPIO peripheral number (x = A to I).
+  * @param  GPIO_Pin : Specifies the pin number
+  * @param  NewState : The new state of the pull up pin.
+  * @retval None
+  */
+void GPIO_ExternalPullUpConfig(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin, FunctionalState NewState)
+{
+  /* Check the parameters */
+  //assert_param(IS_GPIO_PIN_OK(GPIO_Pin));
+  //assert_param(IS_FUNCTIONALSTATE_OK(NewState));
+  
+  if (NewState != DISABLE) /* External Pull-Up Set*/
+  {
+    GPIOx->CR1 |= (u8)GPIO_Pin;
+  } else /* External Pull-Up Reset*/
+  {
+    GPIOx->CR1 &= (u8)(~(GPIO_Pin));
+  }
+}
+
+/**
+  * @brief Deinitializes the led GPIOs registers to their default reset
+  * values.
+  * @param[in] None
+  * @retval None
+  */
+void Led_GPIOs_DeInit(void)
+{
+    GPIO_DeInit(GPIOA);
+    GPIO_DeInit(GPIOD);  
+    GPIO_DeInit(GPIOE);  
+}
+
+/**
+  * @brief initializes the led GPIOs registers to preset
+  * values.
+  * @param[in] None
+  * @retval None
+  */
+void Led_GPIOs_Init(void)
+{
+     /* Configure GPIO for Charger work mode indication(D6/PE0/standard,D7/PD0/fast,D8/PD2/maintaining) */
+    GPIO_DeInit(GPIOA);
+    GPIO_DeInit(GPIOD);  
+    GPIO_DeInit(GPIOE);
+    GPIO_Init(GPIOE, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOD, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOD, GPIO_PIN_2, GPIO_MODE_OUT_PP_LOW_FAST);
+    
+    /* Configure GPIO for Charging status indication(D1/PA2,D2/PD7,D3/PD5,D4/PA6,D5/PA4,D6/PE0) */
+    GPIO_Init(GPIOA, GPIO_PIN_2, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOD, GPIO_PIN_7, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOD, GPIO_PIN_5, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOA, GPIO_PIN_6, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOA, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOE, GPIO_PIN_0, GPIO_MODE_OUT_PP_LOW_FAST);
+
+    /* Configure GPIO for Charging channel indication 3 color LED(Orange/PD4,Green/PD3) */
+    GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
+    GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
 }
 
 

@@ -37,6 +37,7 @@
 #include "atomtimer.h"
 #include "uart.h"
 #include "stm8s.h"
+#include "led.h"
 
 
 /* Constants */
@@ -205,7 +206,8 @@ static void main_thread_func (uint32_t param)
 
     /* Start test. All tests use the same start API. */
     test_status = test_start();
-
+    
+    
     /* Check main thread stack usage (if enabled) */
 #ifdef ATOM_STACK_CHECKING
     if (test_status == 0)
@@ -244,15 +246,29 @@ static void main_thread_func (uint32_t param)
     /* Flash LED once per second if passed, very quickly if failed */
     sleep_ticks = (test_status == 0) ? SYSTEM_TICKS_PER_SEC : (SYSTEM_TICKS_PER_SEC/8);
 
-    /* Configure GPIO for flashing the STM8S Discovery LED on GPIO D0 */
-    GPIO_DeInit(GPIOD);
-    GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_OUT_PP_LOW_FAST);
-
+    UART2_DeInit();
+    
+     /*  Initialise LEDs  */
+    if (led_init() != 0)
+    {
+        /* Error initialising LEDs */
+    }
+ //   else
+ //   {
+ //        GPIO_WriteReverse(GPIOD, GPIO_PIN_4);
+ //        GPIO_WriteReverse(GPIOD, GPIO_PIN_3);          
+  //  }
+      
+   
+    
     /* Test finished, flash slowly for pass, fast for fail */
     while (1)
     {
         /* Toggle LED on pin D0 (Discovery-specific) */
-        GPIO_WriteReverse(GPIOD, GPIO_PIN_3);
+        GPIO_WriteReverse(GPIOE, GPIO_PIN_0);
+        GPIO_WriteReverse(GPIOD, GPIO_PIN_0);
+        GPIO_WriteReverse(GPIOD, GPIO_PIN_2);
+        
 
         /* Sleep then toggle LED again */
         atomTimerDelay (sleep_ticks);

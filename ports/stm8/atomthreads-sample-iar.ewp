@@ -488,7 +488,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state></state>
+                    <state>atomthreads-sample-iar.srec</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -2058,6 +2058,12 @@
             <name>$PROJ_DIR$\atomport.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\device\led.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\device\led.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\stm8s_conf.h</name>
         </file>
         <file>
@@ -2206,9 +2212,10 @@
                     </option>
                     <option>
                         <name>CCIncludePath2</name>
-                        <state>../../kernel</state>
-                        <state>../../tests</state>
-                        <state>./stm8s-periphs</state>
+                        <state>$PROJ_DIR$\..\..\kernel</state>
+                        <state>$PROJ_DIR$\stm8s-periphs</state>
+                        <state>$PROJ_DIR$\..\..\tests</state>
+                        <state>$PROJ_DIR$</state>
                     </option>
                     <option>
                         <name>CCStdIncCheck</name>

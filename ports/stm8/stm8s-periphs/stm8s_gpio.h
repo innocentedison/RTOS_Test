@@ -140,6 +140,8 @@ u8 GPIO_ReadInputData(GPIO_TypeDef* GPIOx);
 u8 GPIO_ReadOutputData(GPIO_TypeDef* GPIOx);
 BitStatus GPIO_ReadInputPin(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin);
 void GPIO_ExternalPullUpConfig(GPIO_TypeDef* GPIOx, GPIO_Pin_TypeDef GPIO_Pin, FunctionalState NewState);
+void Led_GPIOs_DeInit(void);
+void Led_GPIOs_Init(void);
 /**
   * @}
   */

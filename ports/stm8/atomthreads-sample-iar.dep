@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <fileVersion>2</fileVersion>
-    <fileChecksum>2894447890</fileChecksum>
+    <fileChecksum>450372248</fileChecksum>
     <configuration>
         <name>Debug</name>
         <outputs>
@@ -87,6 +87,12 @@
             <file>$PROJ_DIR$\Debug\Obj\atomport.pbi</file>
             <file>$PROJ_DIR$\Debug\Obj\tests-main.pbi</file>
             <file>$PROJ_DIR$\Debug\Obj\uart.pbi</file>
+            <file>$PROJ_DIR$\..\..\..\..\电源\BCM_Version_N1_20200218\RTOS_Test\atomthreads-master\ports\stm8\uart.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\led.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\led.o</file>
+            <file>$PROJ_DIR$\led.h</file>
+            <file>$PROJ_DIR$\device\led.c</file>
+            <file>$PROJ_DIR$\device\led.h</file>
         </outputs>
         <file>
             <name>[ROOT_NODE]</name>
@@ -246,7 +252,7 @@
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 42 26 24 34 43 0 9</file>
+                    <file> 7 43 60 70 42 29 67 61 30 36 34 26 24 9 5 38 45 0 74 77 78 71</file>
                 </tool>
             </inputs>
         </file>
@@ -265,11 +271,11 @@
             <inputs>
                 <tool>
                     <name>ICCSTM8</name>
-                    <file> 64 7 61 70 78 71 77 5 74 65 0 24 29 43 9 60 67 26 27 46 33 34 30 36 38 42 45</file>
+                    <file> 64 7 61 70 78 71 77 5 74 65 0 24 29 43 9 60 67 26 27 46 33 34 30 36 38 42 45 85</file>
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 74 5 46 26 33 7 70 61 64 0 27 24 34 65 77 78 71 43 9</file>
+                    <file> 36 85 30 34 46 65 7 77 71 60 43 42 26 33 61 78 29 67 64 27 0 9 38 45 24 74 70 5</file>
                 </tool>
             </inputs>
         </file>
@@ -292,7 +298,7 @@
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 43 33 65 7 77 71 9 0 61 78 34 3 74 70 5 24 64</file>
+                    <file> 61 33 65 5 42 0 36 34 9 3 7 74 70 38 45 24 29 43 64 77 78 71 30 60 67</file>
                 </tool>
             </inputs>
         </file>
@@ -338,7 +344,7 @@
                 </tool>
                 <tool>
                     <name>BICOMP</name>
-                    <file> 43 9 34 30 38</file>
+                    <file> 34 9 43 30 38</file>
                 </tool>
             </inputs>
         </file>
@@ -439,7 +445,30 @@
             <inputs>
                 <tool>
                     <name>ILINK</name>
-                    <file> 16 59 58 13 15 14 51 50 48 55 54 57 53 49 12 52 17 18</file>
+                    <file> 16 59 58 13 15 14 51 50 84 48 55 54 57 53 49 12 52 17 18</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\device\led.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 84</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 83</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCSTM8</name>
+                    <file> 64 7 61 70 78 71 77 5 74 65 38 34 43 30 36 42 45 9 0 24 29 60 67 3 87</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 74 61 38 87 34 0 65 70 45 60 3 7 5 36 42 29 67 64 77 78 71 43 30 9 24</file>
                 </tool>
             </inputs>
         </file>
