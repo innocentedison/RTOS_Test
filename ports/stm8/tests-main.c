@@ -193,8 +193,8 @@ static void main_thread_func (uint32_t param)
 {
     uint32_t test_status;
     int sleep_ticks;
-    u8 CNT;
-    unsigned char I2c_Buf[2];
+    u8 a = 0;
+//    u8 i = 0;
     
     /* Compiler warnings */
     param = param;
@@ -250,11 +250,18 @@ static void main_thread_func (uint32_t param)
     /* Flash LED once per second if passed, very quickly if failed */
     sleep_ticks = (test_status == 0) ? SYSTEM_TICKS_PER_SEC : (SYSTEM_TICKS_PER_SEC/8);
 
+#if defined USE_SOFTWARE_IIC
+    
+    SC_8815_Init();
+    
+#endif
+    
+#if defined USE_HARDWARE_IIC
+    
     IIC_Init();
-    I2C_AT24C02_Test();
+    I2C_SC8815_Test();
+#endif
     
-    
- //   UART2_DeInit();
     
      /*  Initialise LEDs  */
     if (led_init() != 0)
@@ -276,10 +283,48 @@ static void main_thread_func (uint32_t param)
         GPIO_WriteReverse(GPIOE, GPIO_PIN_0);
         GPIO_WriteReverse(GPIOD, GPIO_PIN_0);
         GPIO_WriteReverse(GPIOD, GPIO_PIN_2);
-      
+        
+#if defined USE_SOFTWARE_IIC
+  //      a= SC8815_ReadOneByte(0x00);
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x00));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x01));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x02));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x03));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x04));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x05));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x06));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x07));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x08));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x09));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0a));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0b));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0c));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0d));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0e));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x0f));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x10));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x11));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x12));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x13));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x14));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x15));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x16));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x17));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x18));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x19));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x1a));
+        printf("\n0x%X\n", SC8815_ReadOneByte(0x1b));
+#endif        
 
+        if(!KEY1 || !KEY2)
+        {  
+            GPIO_WriteReverse(GPIOA, GPIO_PIN_2);
+        }
+        
         /* Sleep then toggle LED again */
         atomTimerDelay (sleep_ticks);
+        printf ("\nsleep_ticks\n");
+        
     }
 }
 

@@ -125,6 +125,16 @@ typedef enum
   * @}
   */
 
+ //Key 
+#define KEY1_GPIO  (GPIOC)
+#define KEY1_PIN  (GPIO_PIN_4)
+
+#define KEY2_GPIO  (GPIOC)
+#define KEY2_PIN  (GPIO_PIN_3)
+
+#define KEY1 GPIO_ReadInputPin(KEY1_GPIO, KEY1_PIN)
+#define KEY2 GPIO_ReadInputPin(KEY2_GPIO, KEY2_PIN)  
+    
 /* Exported functions ------------------------------------------------------- */
 /** @addtogroup GPIO_Exported_Functions
   * @{

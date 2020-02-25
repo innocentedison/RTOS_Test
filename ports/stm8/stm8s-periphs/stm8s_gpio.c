@@ -265,6 +265,7 @@ void Led_GPIOs_Init(void)
     /* Configure GPIO for Charging channel indication 3 color LED(Orange/PD4,Green/PD3) */
     GPIO_Init(GPIOD, GPIO_PIN_4, GPIO_MODE_OUT_PP_LOW_FAST);
     GPIO_Init(GPIOD, GPIO_PIN_3, GPIO_MODE_OUT_PP_HIGH_FAST);
+    
 }
 
 
